@@ -1,34 +1,43 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:linked_in_learning/widgets/chat_bubble.dart';
 import 'package:linked_in_learning/widgets/chat_input.dart';
 
 import 'models/chat_message_entity.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   ChatPage({Key? key}) : super(key: key);
 
-  List<ChatMessageEntity> _messages = [
-    ChatMessageEntity(
-        author: Author(userName: 'Niteesh97'),
-        createdAt: 2131231242,
-        id: '1',
-        text: 'First text'),
-    ChatMessageEntity(
-        author: Author(userName: 'Niteesh97'),
-        createdAt: 2131231442,
-        id: '1',
-        text: 'Second text',
-        imageUrl: 'https://3009709.youcanlearnit.net/Alien_LIL_131338.png'),
-    ChatMessageEntity(
-      author: Author(userName: 'jane'),
-      createdAt: 2131234242,
-      id: '1',
-      text: 'Third text',
-    )
-  ];
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+
+  List<ChatMessageEntity> _messages = [];
+
+  _loadInitialMessages() async {
+    final response = await rootBundle.loadString('assets/mock_data.json');
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+    final List<ChatMessageEntity> _chatMessages = decodedList.map((e){
+      return ChatMessageEntity.fromJson(e);
+    }).toList();
+    setState(() {
+      _messages = _chatMessages;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadInitialMessages();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _loadInitialMessages();
     final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +48,6 @@ class ChatPage extends StatelessWidget {
           IconButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context,'/');
-                print('Icon pressed!');
               },
               icon: Icon(Icons.logout))
         ],
@@ -52,9 +60,8 @@ class ChatPage extends StatelessWidget {
                   itemCount: _messages.length,
                   itemBuilder: (context, index) {
                     return ChatBubble(
-                        alignment: _messages[index].author.userName == 'Niteesh97'
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
+                        alignment: _messages[index].author.userName == "Niteesh97" ? Alignment.centerRight : Alignment.bottomLeft,
+                        bg: _messages[index].author.userName == "Niteesh97"? Colors.green : Colors.grey,
                         entity: _messages[index]);
                   })),
           ChatInput(),

@@ -4,7 +4,8 @@ import '../models/chat_message_entity.dart';
 class ChatBubble extends StatelessWidget {
   final ChatMessageEntity entity;
   final Alignment alignment;
-  const ChatBubble({Key? key, required this.alignment,required this.entity}) : super(key: key);
+  final Color bg;
+  const ChatBubble({Key? key, required this.alignment,required this.entity,required this.bg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class ChatBubble extends StatelessWidget {
           ),
           margin: EdgeInsets.all(50),
           decoration: BoxDecoration(
-              color: Colors.grey,
+              color: bg,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
@@ -40,6 +41,6 @@ class ChatBubble extends StatelessWidget {
               )
           ),
         )
-    );;
+    );
   }
 }
