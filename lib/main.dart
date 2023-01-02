@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:linked_in_learning/chat_page.dart';
 
 import 'package:linked_in_learning/login_page.dart';
+import 'package:linked_in_learning/utils/brand_Color.dart';
 
 
 void main() {
@@ -14,7 +15,7 @@ class ChatApp extends StatelessWidget{
     // TODO: implement build
     return MaterialApp(
       title: 'ChatApp',
-      theme: ThemeData(primarySwatch: Colors.green,appBarTheme: AppBarTheme(backgroundColor: Colors.green,foregroundColor: Colors.black)),
+      theme: ThemeData(primarySwatch: BrandColor.primarygreen,appBarTheme: AppBarTheme(backgroundColor: BrandColor.primarygreen,foregroundColor: BrandColor.primaryblack)),
       home: LoginPage(),
       routes: {
         '/chat':(context)=> ChatPage(),

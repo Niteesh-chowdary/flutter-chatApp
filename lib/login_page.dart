@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:linked_in_learning/chat_page.dart';
+import 'package:linked_in_learning/utils/spaces.dart';
 import 'package:linked_in_learning/utils/textfield_styles.dart';
 import 'package:linked_in_learning/widgets/login_text_field.dart';
+import 'package:social_media_buttons/social_media_button.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -54,13 +56,12 @@ class LoginPage extends StatelessWidget {
                       fontSize: 20,
                       color: Colors.blueGrey),
                 ),
-                Image.network(
-                  'https://3009709.youcanlearnit.net/Alien_LIL_131338.png',
+                verticalSpacing(12),
+                Image.asset(
+                  'assets/chatappIcon.webp',
                   height: 200,
                 ),
-
-                //TODO: Add Username & Password text fields
-
+                verticalSpacing(24),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -79,9 +80,7 @@ class LoginPage extends StatelessWidget {
                         controller: userNameController,
                         hintText: 'Enter your username',
                       ),
-                      SizedBox(
-                        height: 24,
-                      ),
+                      verticalSpacing(24),
                       LoginTextField(
                         hasAsterisk: true,
                         controller: passwordController,
@@ -90,9 +89,7 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 24,
-                ),
+                verticalSpacing(24),
                 ElevatedButton(
                     onPressed: (){
                       loginUser(context);
@@ -112,6 +109,13 @@ class LoginPage extends StatelessWidget {
                       Text('https://matladuko.com'),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialMediaButton.twitter(url: 'https://twitter.com',color: Colors.lightBlue,),
+                    SocialMediaButton.linkedin(url: 'https://linkedin.com',color: Colors.blue[900],),
+                  ],
                 )
               ],
             ),
