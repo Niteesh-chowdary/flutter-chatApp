@@ -4,10 +4,10 @@ import '../utils/textfield_styles.dart';
 
 class LoginTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String hinText;
+  final String hintText;
   final FormFieldValidator<String>? validator;
   final bool hasAsterisk;
-  const LoginTextField({Key? key,required this.controller,required this.hinText, this.validator,this.hasAsterisk=false}) : super(key: key);
+  const LoginTextField({Key? key,required this.controller,required this.hintText, this.validator,this.hasAsterisk=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LoginTextField extends StatelessWidget {
       obscureText: hasAsterisk,
       controller: controller,
       decoration: InputDecoration(
-          hintText: hinText,
+          hintText: hintText,
           hintStyle: ThemeTextStyle.loginTextFieldStyle,
           border: OutlineInputBorder()),
     );
