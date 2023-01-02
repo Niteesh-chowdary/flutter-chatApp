@@ -29,6 +29,12 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  onMessageSent(ChatMessageEntity entity){
+    setState(() {
+      _messages.add(entity);
+    });
+  }
+
   @override
   void initState() {
     _loadInitialMessages();
