@@ -5,9 +5,14 @@ import 'package:linked_in_learning/utils/textfield_styles.dart';
 import 'package:linked_in_learning/widgets/login_text_field.dart';
 import 'package:social_media_buttons/social_media_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
 
   //TODO: Validate email and username values
@@ -15,9 +20,9 @@ class LoginPage extends StatelessWidget {
     if (_formkey.currentState != null && _formkey.currentState!.validate()) {
       print(userNameController.text);
       print(passwordController.text);
-      
+
       Navigator.pushReplacementNamed(context, '/chat',arguments: userNameController.text);
-      
+
       print('login successful!');
     } else {
       print('not successful!');
@@ -25,7 +30,17 @@ class LoginPage extends StatelessWidget {
   }
 
   final userNameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    userNameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
